@@ -4,7 +4,8 @@
 - About me 
   - Software developer interested in functional programming with Elixir/Clojure 
   - Currently working with Freelance and casual jobs involving VueJS, DRF and FastAPI
-  - PlayFully interacting with DevOps 
+  - PlayFully interacting with DevOps
+  - Exploring Nix and it's possibilities
   
   - [Github](https://github.com/lemosjose)
   - [Linkedin](https://linkedin.com/lemosjose)
