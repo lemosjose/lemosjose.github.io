@@ -8,7 +8,7 @@
   - Exploring Nix and it's possibilities
   
   - [Github](https://github.com/lemosjose)
-  - [Linkedin](https://linkedin.com/lemosjose)
+  - [Linkedin](https://www.linkedin.com/in/lemosjose/)
   
 - Posts 
   - [Why a Sloth would run NixOS](nixos-made-me-lazy)
