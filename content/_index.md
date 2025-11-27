@@ -3,8 +3,8 @@
 
 - About me 
   - Software developer interested in functional programming with Elixir/Clojure 
-  - Currently working with Freelance and casual jobs involving VueJS, DRF and FastAPI
-  - PlayFully interacting with DevOps
+  - FullStack Freelancer with React/TypeScript (Fastify) and Python/FastApi
+  - Keen on IaC, Terraform, Nix and DevOps in general
   - Exploring Nix and it's possibilities
   
   - [Github](https://github.com/lemosjose)
