@@ -12,4 +12,4 @@
   
 - Posts 
   - [Why a Sloth would run NixOS](nixos-made-me-lazy)
-    
+  - [Dr. ShadLove](dr-strangelove)
