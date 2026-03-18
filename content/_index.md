@@ -1,15 +1,16 @@
 ---
 ---
 
-- About me 
-  - Software developer interested in functional programming with Elixir/Clojure 
-  - FullStack Freelancer with React/TypeScript (Fastify) and Python/FastApi
-  - Keen on IaC, Terraform, Nix and DevOps in general
-  - Exploring Nix and it's possibilities
-  
-  - [Github](https://github.com/lemosjose)
-  - [Linkedin](https://www.linkedin.com/in/lemosjose/)
-  
-- Posts 
-  - [Why a Sloth would run NixOS](nixos-made-me-lazy)
-  - [Dr. ShadLove](dr-strangelove)
+### About me:
+Data Engineer, But passionate about Computers in general
+
+* Working with AWS, Data Pipelines and Databases daily
+* DevOps/Nix/IaC Enthusiast 
+* Passionate about continous learning, interested about Maths and FP (outside of the work scope)
+* Languages: PT-BR, EN-US, ES-AR, FR-CA
+
+Other Links:
+- [Github](https://github.com/lemosjose)
+- [Linkedin](https://www.linkedin.com/in/lemosjose/)
+- [WebSite](https://lemosjose.me/)
+
