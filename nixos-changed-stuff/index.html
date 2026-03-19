@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arbutus+Slab&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/main.css" rel="stylesheet" />
+    
+  <title>NixOS changed how i look at my domestic Operating System - </title>
+
+  </head>
+  <body>
+    
+  <div class="my-16 space-y-4">
+    <div class="space-y-4">
+      <div>
+  <a href="/">
+    <h1 class="text-3xl font-semibold font-head"></h1>
+  </a>
+</div>
+
+      
+  <div>
+    <div class="text-xl font-semibold mb-1 text-brand font-head">
+      NixOS changed how i look at my domestic Operating System
+    </div>
+    <div class="mb-4 font-medium w-max text-sm">
+      Posted on March 18, 2026
+    </div>
+    <div class="post mb-4"><h2 id="">
+<img src="https:&#x2F;&#x2F;lemosjose.github.io&#x2F;processed_images&#x2F;sloth_nix.2b05b66961b78d44.png" />
+</h2>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ol>
+<li><a href="https://lemosjose.github.io/nixos-changed-stuff/#introduction">Introduction</a></li>
+<li><a href="https://lemosjose.github.io/nixos-changed-stuff/#proposal">The Sloth Proposal</a></li>
+<li><a href="https://lemosjose.github.io/nixos-changed-stuff/#flakes">Flakes</a></li>
+<li><a href="https://lemosjose.github.io/nixos-changed-stuff/#conclusion">Conclusion</a></li>
+</ol>
+<h2 id="introduction">Introduction</h2>
+<p>I started using NixOS out of actual necessity. I worked in a Lab at UEMG (Universidade do Estado de Minas Gerais), where i had 3 setups: my personal desktop at home, my laptop, and a VM on the Lab's stationary Workstation. I needed to work interchangeably, it was painful to keep track of packages and configurations for each one, and ditching the setup configuration to be the reason of an error was not that Trivial, so i had no much option besides NixOS, i didn't want to be always checking for missing packages, different home configurations, i just wanted to sync the setups and keep work going, NixOS was basically my only option.</p>
+<h3 id="first-contact">First Contact</h3>
+<p>I installed nixOS on my computer and started to google how to get things working, i ended up installing a lot of packages with <code>nix-env -iA nixos.&lt;package&gt;</code>, wich is &gt;not&lt; the correct way, but i was figuring things out (and have since wiped the filesystems to clean up the mess).</p>
+<p>But then, I understood how things were supposed to work, i just had to edit <code>configuration.nix</code> and rebuild my configuration, then, when i had to configure services, it got me to react with:</p>
+<blockquote>
+<p>" I just added this line, ran a rebuild and it all worked?"
+(at this time, i didn't even know that flakes were a thing. This would get me into even more surprises)</p>
+</blockquote>
+<p>I was surprised by how a single line would install the package, configure the service, sometimes change permissions for specific files, and everything would be done in a snap, it was shocking and enchanting at first glance. The problem with keeping "track" of everything was gone, i could just apply the same config on another machine.</p>
+<p>Out of curiosity, i thought "how easy it is to change to another DE, completely different from the current one", considering GNOME and plasma, that have the GTK configuration, applications, and a lot of differences, it's common to have "trash" laying around your <code>~/</code> when you try to switch between them, a lot of linux users just reinstall the root filesystem to change between them.</p>
+<p>Then, i changed my configuration, changing the option:</p>
+<p><code>services.desktopManager.plasma6.enable = true</code></p>
+<p>to:</p>
+<p><code>services.desktopManager.gnome = true</code></p>
+<p>together with the <code>services.displayManager</code> option (check <a rel="external" href="https://search.nixos.org/options">NixOS options</a> on how to do the changes properly for your NixOS configuration and channel).</p>
+<p>When i logged out, the gdm screen already prompted me for a login, i've been using GNOME passionately on nixOS since. I was astonished about how clean and fast everything was, i had never imagined something like it on any other distro, dnf, from fedora, had a command for it, <code>dnf swap</code>, but it still left a lot of trash on your filesystem, so it was not a great experience migrating from one DE to another.</p>
+<p>I also had to install NixOS on my laptop, the last Arch Linux survivor, i just copied my config and ran a nixos-install, everything was in place, and i was ready to work on the projects i had to work at the time. I got shocked by how direct and quick everything was.</p>
+<h2 id="the-ansible-and-or-personal-scripting-alternative">The Ansible and/or Personal Scripting Alternative</h2>
+<p>Before adopting NixOS, i considered using Ansible with another distro, there is a famous <a rel="external" href="https://www.youtube.com/watch?v=vVBVZf9UtZY">Brazilian Youtuber</a> who uses an Ansible-alike (using shellscripts) and "playbooks" for setting up the operating sytem, presenting a convincing case for it. However, when it came to my Arch Linux setup, I ultimately decided against it, since it was an "extra" solution on top of the OS, wich seemed less than ideal, since Ansible is not meant to be full-blown declarative opearting system like NixOS, and i didn't want to deal with testing it on clean installs, or having a problem with a shellscript, wich i cannot just change and rebuild to create a new generation (their changes in the filesystem are permanent), files that may be on a different place than what i have thought when writing the shellscript, something i copied from another script made for another distro, yada yada. The whole approach didn't seem appealing.</p>
+<h3 id="how-i-ended-up-sticking-with-nixos-after-leaving-the-lab">How I Ended Up Sticking with NixOS After Leaving the Lab</h3>
+<p>I left the lab, but i was already in love with how NixOS works. I didn't have to activate services, i could insert tons of services into my configuration and just do a nixos-rebuild, everything was configured without any further intervention, i would have to consult the Arch Wiki to configure the user sockets for PipeWire, on NixOS, i just ran a rebuild and audio was working perfectly, with a single command and no headaches, i had functional Wi-Fi, audio, dhcp, disk automounting (udisks), Bluetooth and a DE to work, i could not imagine such a thing on Arch, were i was before.</p>
+<h2 id="proposal">Proposal</h2>
+<p>There is a funny quote that Brazilian Nix users tend to repeat:</p>
+<blockquote>
+<p>"Nix makes easy tasks impossible or difficult, but solves impossible tasks with 0 effort"</p>
+</blockquote>
+<p>NixOS is the fancy sloth' operating system, it's great if you do not want to lose time with your OS when difficult configurations need to be deployed.</p>
+<p>Most people think that NixOS is a system for those who want to babysit their operating system, spend their day configuring stuff, i'm here to propose that it's actually a great system for people wanting the opposite, to get things going quickly and easily. I fall into that second camp. My frustation with Canonical forcing Snaps on Ubuntu led me to Arch and now i can't imagine leaving NixOS not even for a return to an ideal "Ubuntu", with tons of changes to the current state.</p>
+<h3 id="example-1-ollama-aider-simple-and-direct-setup">Example 1: Ollama/Aider simple and direct setup</h3>
+<p>Settings up Ollama is as simple as adding it to the services in your configuration.nix, including the models you want, and then running a rebuild. Afterwards, the models are downloaded and ready to be accessed locally. You can just copy and paste the code from the documentation, but i recommend organizing this withing your configuration.nix for a cleaner and easier file/config.</p>
+<p>Mine goes as follows:</p>
+<p>As it shows in the <code>ollama ps</code> stdout, it's using only the gpu, working fine with my amd GPU and the open-source driver. The configuration in emacs is as simple as:</p>
+<pre><code>(use-package aidermacs
+  :bind ((&quot;C-c a&quot; . aidermacs-transient-menu))
+  :custom
+  ; See the Configuration section below
+  (aidermacs-default-chat-mode &#39;architect)
+  (aidermacs-default-model &quot;ollama_chat/llama3.1:latest&quot;))
+</code></pre>
+<p>Which is just an adaptation of the copy-and-paste from the aidermacs documentation</p>
+<p>Here is an example of it working with a simple FastAPI file containing a Pydantic (an external library) class:</p>
+
+<img src="https:&#x2F;&#x2F;lemosjose.github.io&#x2F;processed_images&#x2F;aider_emacs.29f955b1ab5ded80.png" />
+<p>This, combined with the pop-up documentation that appears right when i hover over the <em>BaseModel</em> statement, creates a powerful and comfortable setup.</p>
+<h3 id="example-2-podman-as-a-docker-backend">Example 2: Podman as a Docker Backend</h3>
+<p>When looking for how to configure Podman on NixOS, you will see this configuration snippet (probably not formatted like the snippet bellow):</p>
+<pre><code data-lang="nix">  virtualisation = {
+       podman = {
+          enable = true;
+          dockerCompat = true;
+       }; 
+</code></pre>
+<p>If you search for the virtualisation.podman.dockerCompat nixOS option, you will see a link a for a <em>default.nix</em> file, for convenience, it's <a rel="external" href="https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/virtualisation/podman/default.nix">here</a>.</p>
+<p>This simple option implements a lot of configuration that people on other distributions would typically have to do manually to get everything working rootless. Since i'm lazy when it comes to tweak operating systems, i really appreciate the Nix way of doing it, i add a line and a whole complex configuration is done for me based on the file i edited before.</p>
+<h3 id="final-example-the-swiss-army-knife-for-zsh">Final example, the swiss army knife for zsh</h3>
+<p>The earlier Brazilian youtuber mentioned has his shell script for configuring zoxide, oh-my-zsh, specific zsh features, and scripts may differ for each distro. Also, there are aliases to consider, which you would have to set up all over again. Here, i just create the snippet and the zsh is already configured in any machine i want,</p>
+<pre><code data-lang="nix">       zsh = { 
+          enable = true; 
+	  enableCompletion = true; 
+	  autosuggestion.enable = true; 
+	  syntaxHighlighting.enable = true;
+	  shellAliases = { 
+	     enterDev = &quot;nix-shell nix/shell.nix&quot;;
+	     update = &quot;sudo nixos-rebuild switch --upgrade&quot;;
+	     clean = &quot;sudo nix-collect-garbage -d&quot;;
+	     cd = &quot;z&quot;; 
+	  };
+	  history = { 
+	      path = &quot;/home/lemos/.zsh/history&quot;;
+	  };
+	  oh-my-zsh = {
+	      enable = true; 
+	      plugins = [&quot;git&quot;];
+	      theme = &quot;afowler&quot;;
+	  };
+</code></pre>
+<p>This snippet can be easily copied and shared with another user on your system, or with a friend who is just starting to configure their Home Manager setup on NixOS</p>
+<h2 id="flakes">Flakes</h2>
+<p>Most people enter nix writing everything to a <code>configuration.nix</code> file, this may work for simple setups, but as the config grows, things get gross.</p>
+<p>Flakes make all this hassle easier, now your config can be organized as a codebase, keeping .nix files smaller and organized into "domains" that actually make sense. Modules and Inputs from <code>nix-community</code> now can be imported for all machines easily. These modules come with important and handful options, without flakes, these modules are not handled in a single source that "maps" everything and builds based on scope. AI agents can also work with nix, and since you can edit your config as a cloned repo, it's not much of a hassle to edit it like you would do with any codebase, from vscode/cursor/antigravity/kiro, using the agent for stressful tasks, everything circles around a codebase that works like any other one.</p>
+<p>You can check <a rel="external" href="https://github.com/lemosjose/nix-config">my config</a> as an example for the organization of nix files as "domains" and issues.</p>
+<p>It's also easier to setup new machines, flakes can handle the disk partitioning, installing the system, and importing configurations from previous setups way easier, you create reusable code within your machines, your home is know a "managed" lab.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Basically, my whole point since the beginning is: NixOS does not require much work to get going (as most people think), yes, there is a learning curve, yes, you do need some time to get used to the "Nix"(tm) way of doing things.</p>
+<p>And, if we are to be honest, we need to recognize switching to Linux itself has a learning curve on it's own, and we all undermine how much time we spent with this initial proccess.</p>
+<p>All tools have a purpose, scopes and "go"/"no-go" cases, do not ditch something because of a first impression. Think about your needs, which tasks/configurations happen more frequently: Do you add new packages every single day? Do you handle podman/docker with specific configurations? Do you handle complex services that need a lot of tweaking into config files?</p>
+</div>
+  </div>
+
+    </div>
+    <footer class="text-sm text-center pt-4 border-t-2 border-brand space-y-1">
+      <div>
+        
+          
+        
+      </div>
+      <div class="font-head">
+  &mdash; Crafted with
+  <a href="https://www.getzola.org/" target="_blank" class="font-medium">
+    Zola
+  </a>
+  and
+  <a href="https://github.com/ssiyad/block" target="_blank" class="font-medium">
+    Block
+  </a>
+  &mdash;
+</div>
+
+    </footer>
+  </div>
+
+  </body>
+</html>
